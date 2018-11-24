@@ -1,3 +1,3 @@
 # XamarinAndroid
-Xamarin Android class.
+Xamarin Android class. <br/>
 Projects created for learning purposes, mainly class assignments.
