@@ -1,36 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+using Android.Util;
 using SQLite;
-using Environment = Android.OS.Environment;
 
 namespace NoteAppHomeworkRJ
 {
-    class NoteDao
+    internal class NoteDao
     {
-        private readonly string connectionString;
-        private SQLiteConnection dbConnection;
-
-        private static readonly log4net.ILog log
-            = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly string _connectionString;
+        private SQLiteConnection _dbConnection;
 
         public NoteDao(string connectionString)
         {
-            this.connectionString = connectionString;
-            log.Info($"----- Connection string: {this.connectionString}");
+            _connectionString = connectionString;
+            Log.Info(GetType().Name, $"----- Connection string: {_connectionString}");
         }
 
         public void ConnectToDatabase()
         {
-            dbConnection = new SQLiteConnection(connectionString);
-            log.Info("----- Connected to database.");
+            _dbConnection = new SQLiteConnection(_connectionString);
+            Log.Info(GetType().Name, "----- Connected to database.");
         }
 
         public void CreateNewNoteTable()
@@ -38,12 +27,12 @@ namespace NoteAppHomeworkRJ
             try
             {
                 ConnectToDatabase();
-                dbConnection.CreateTable<Note>();
-                log.Info("----- Database created.");
+                _dbConnection.CreateTable<Note>();
+                Log.Info(GetType().Name, "----- Note database created");
             }
             catch (Exception e)
             {
-                log.Info(e.Message);
+                Log.Info(GetType().Name, e.Message);
             }
         }
 
@@ -51,11 +40,11 @@ namespace NoteAppHomeworkRJ
         {
             try
             {
-                return dbConnection.Table<Note>();
+                return _dbConnection.Table<Note>();
             }
             catch (NullReferenceException e)
             {
-                log.Info(e.Message);
+                Log.Info(GetType().Name, e.Message);
                 return null;
             }
         }
@@ -64,20 +53,17 @@ namespace NoteAppHomeworkRJ
         {
             try
             {
-                dbConnection.Insert(note);
+                _dbConnection.Insert(note);
             }
             catch (Exception e)
             {
-                log.Info(e.Message);
+                Log.Info(GetType().Name, e.Message);
             }
         }
 
         public void SaveMultipleNotesToDatabase(List<Note> noteList)
         {
-            foreach (var note in noteList)
-            {
-                SaveNoteToDatabase(note);
-            }
+            foreach (var note in noteList) SaveNoteToDatabase(note);
         }
     }
 }

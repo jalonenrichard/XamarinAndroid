@@ -1,38 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
+using Environment = System.Environment;
 
 namespace NoteAppHomeworkRJ
 {
     [Activity(Label = "NewNotesActivity")]
-    class NewNotesActivity : Activity
+    internal class NewNotesActivity : Activity
     {
-        private NoteDao noteDao;
-        private EditText header;
-        private EditText content;
-        private Button saveButton;
+        private EditText _content;
+        private EditText _header;
+        private NoteDao _noteDao;
+        private Button _saveButton;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.noteadd_layout);
-            header = FindViewById<EditText>(Resource.Id.editTextNoteHeaderAdd);
-            content = FindViewById<EditText>(Resource.Id.editTextNoteContentAdd);
-            saveButton = FindViewById<Button>(Resource.Id.buttonNoteSave);
-            noteDao = new NoteDao(Path.Combine(
-                System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
+            _header = FindViewById<EditText>(Resource.Id.editTextNoteHeaderAdd);
+            _content = FindViewById<EditText>(Resource.Id.editTextNoteContentAdd);
+            _saveButton = FindViewById<Button>(Resource.Id.buttonNoteSave);
+            _noteDao = new NoteDao(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 "noteDatabase.db3"));
 
-            noteDao.ConnectToDatabase();
-            saveButton.Click += delegate
+            _noteDao.ConnectToDatabase();
+            _saveButton.Click += delegate
             {
                 AddNoteToDatabase();
                 SwitchToMainActivity();
@@ -41,8 +37,8 @@ namespace NoteAppHomeworkRJ
 
         private void AddNoteToDatabase()
         {
-            var note = new Note {Headline = header.Text, Content = content.Text, CreatedDateTime = DateTime.Now};
-            noteDao.SaveNoteToDatabase(note);
+            var note = new Note {Headline = _header.Text, Content = _content.Text, CreatedDateTime = DateTime.Now};
+            _noteDao.SaveNoteToDatabase(note);
         }
 
         private void SwitchToMainActivity()
