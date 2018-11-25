@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-	android:layout_width="match_parent"
-    android:layout_height="match_parent">
-	
-	<LinearLayout
-		android:orientation="horizontal"
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/linearLayout1" >
 
-		<Button
-			android:text="New Note"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:id="@+id/buttonEditNote" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundColor">
 
-	</LinearLayout>
+  <ListView
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@color/listViewDivider"
+    android:id="@+id/listView1" />
 
-	<ListView
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:id="@+id/listView1" />
-</LinearLayout>
+  <Button
+    android:id="@+id/buttonNewNote"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    android:background="@drawable/roundbutton"
+    android:gravity="center_vertical"
+    android:text="+"
+    android:textAlignment="center"
+    android:textSize="40dp"
+    android:fontFamily="sans-serif-thin"
+    android:textColor="@color/colorAddButton"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="30dp" />
+
+</RelativeLayout>

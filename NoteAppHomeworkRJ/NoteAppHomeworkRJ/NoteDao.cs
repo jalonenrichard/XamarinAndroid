@@ -53,6 +53,8 @@ namespace NoteAppHomeworkRJ
         {
             try
             {
+                note.Headline = note.Headline.Trim();
+                note.Content = note.Content.Trim();
                 _dbConnection.Insert(note);
             }
             catch (Exception e)
@@ -77,17 +79,14 @@ namespace NoteAppHomeworkRJ
         {
             try
             {
+                note.Headline = note.Headline.Trim();
+                note.Content = note.Content.Trim();
                 _dbConnection.Update(note);
             }
             catch (Exception e)
             {
                 Log.Info(GetType().Name, e.Message);
             }
-        }
-
-        public void SaveMultipleNotesToDatabase(List<Note> noteList)
-        {
-            foreach (var note in noteList) SaveNoteToDatabase(note);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace NoteAppHomeworkRJ
             view.FindViewById<TextView>(Resource.Id.textViewNoteHeader).Text = _items[position].Headline;
             view.FindViewById<TextView>(Resource.Id.textViewNoteContent).Text = _items[position].Content;
             view.FindViewById<TextView>(Resource.Id.textViewNoteDate).Text =
-                _items[position].CreatedDateTime.ToString(CultureInfo.InvariantCulture);
+                _items[position].CreatedDateTime.ToString(CultureInfo.CurrentCulture);
             return view;
         }
     }

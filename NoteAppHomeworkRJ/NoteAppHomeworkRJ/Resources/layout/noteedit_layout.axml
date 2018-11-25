@@ -1,47 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-	<EditText
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:hint="Headline"
-		android:id="@+id/editTextNoteHeaderEdit" />
-	<EditText
-		android:inputType="textMultiLine"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:hint="Note content"
-		android:id="@+id/editTextNoteContentEdit" />
-	
-	
-	<LinearLayout
-		android:orientation="horizontal"
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/linearLayout1"
-		android:layout_marginLeft="16dp"
-		android:layout_marginRight="16dp">
-		<Button
-		android:text="Save"
-		android:layout_weight="1"
-			android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:id="@+id/buttonNoteSave" />
-		<Button
-		android:text="Delete"
-		android:layout_weight="1"
-			android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_gravity="center_horizontal"
-		android:id="@+id/buttonNoteDelete" />
-	</LinearLayout>
 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/backgroundColor">
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+      android:orientation="vertical"
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:minWidth="25px"
+          android:minHeight="25px"
+          android:hint="Headline"
+          android:maxLength="25"
+          android:textSize="24dp"
+          android:textColor="@color/colorPrimaryDark"
+          android:backgroundTint="@color/editTint"
+          android:id="@+id/editTextNoteHeaderEdit" />
+        <EditText
+          android:inputType="textMultiLine"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Note content"
+          android:maxLength="250"
+          android:textSize="20dp"
+          android:textColor="@color/colorPrimaryDark"
+          android:backgroundTint="@color/editTint"
+          android:id="@+id/editTextNoteContentEdit" />
+      </LinearLayout>
 
-</LinearLayout>
+      <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp">
+        <Button
+          android:layout_marginEnd="4dp"
+          android:text="Save"
+          android:layout_weight="1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:id="@+id/buttonNoteSave"
+          android:textSize="16dp"
+          android:fontFamily="sans-serif-condensed"
+          android:background="@color/colorPrimaryDark"
+          android:textColor="@color/backgroundColor" />
+        <Button
+          android:layout_marginStart="4dp"
+          android:text="Delete"
+          android:layout_weight="1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:textSize="16dp"
+          android:fontFamily="sans-serif-condensed"
+          android:background="@color/colorPrimaryDark"
+          android:textColor="@color/backgroundColor"
+          android:id="@+id/buttonNoteDelete" />
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+</RelativeLayout>

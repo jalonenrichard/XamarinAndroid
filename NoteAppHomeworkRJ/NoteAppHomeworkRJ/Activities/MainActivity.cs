@@ -22,10 +22,15 @@ namespace NoteAppHomeworkRJ
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
+
+            var listView = FindViewById<ListView>(Resource.Id.listView1);
+            var newNoteButton = FindViewById<Button>(Resource.Id.buttonNewNote);
+
             var noteDao = new NoteDao(Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.Personal),
                 "noteDatabase.db3"));
             noteDao.CreateNewNoteTable();
+
             var allNotes = noteDao.GetAllNotesFromDatabase();
             try
             {
@@ -36,9 +41,6 @@ namespace NoteAppHomeworkRJ
                 Log.Info(GetType().Name, $"----- {e.Message}");
             }
 
-            var listView = FindViewById<ListView>(Resource.Id.listView1);
-            var editNotesButton = FindViewById<Button>(Resource.Id.buttonEditNote);
-
             listView.Adapter = new CustomAdapter(this, _noteList);
 
             listView.ItemClick += (object sender, ItemClickEventArgs e) =>
@@ -47,12 +49,10 @@ namespace NoteAppHomeworkRJ
                 EditNoteActivity.NoteToEdit = note;
                 Log.Info(GetType().Name, $"----- Note Header: {note.Headline}, Note Content: {note.Content}");
                 var intent = new Intent(this, typeof(EditNoteActivity));
-                //intent.PutExtra("NoteHeader", note.Headline);
-                //intent.PutExtra("NoteContent", note.Content);
                 StartActivity(intent);
             };
 
-            editNotesButton.Click += delegate
+            newNoteButton.Click += delegate
             {
                 var editNoteActivity = new Intent(this, typeof(NewNotesActivity));
                 StartActivity(editNoteActivity);
