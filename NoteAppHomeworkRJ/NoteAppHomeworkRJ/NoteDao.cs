@@ -61,6 +61,30 @@ namespace NoteAppHomeworkRJ
             }
         }
 
+        public void RemoveNoteFromDatabase(Note note)
+        {
+            try
+            {
+                _dbConnection.Delete(note);
+            }
+            catch (Exception e)
+            {
+                Log.Info(GetType().Name, e.Message);
+            }
+        }
+
+        public void UpdateNoteInDatabase(Note note)
+        {
+            try
+            {
+                _dbConnection.Update(note);
+            }
+            catch (Exception e)
+            {
+                Log.Info(GetType().Name, e.Message);
+            }
+        }
+
         public void SaveMultipleNotesToDatabase(List<Note> noteList)
         {
             foreach (var note in noteList) SaveNoteToDatabase(note);

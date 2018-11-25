@@ -7,7 +7,9 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Util;
 using Android.Widget;
+using Newtonsoft.Json;
 using Environment = System.Environment;
+using static Android.Widget.AdapterView;
 
 namespace NoteAppHomeworkRJ
 {
@@ -38,7 +40,17 @@ namespace NoteAppHomeworkRJ
             var editNotesButton = FindViewById<Button>(Resource.Id.buttonEditNote);
 
             listView.Adapter = new CustomAdapter(this, _noteList);
-            listView.ItemClick += (sender, e) => { Toast.MakeText(this, "Vajutasid", ToastLength.Short).Show(); };
+
+            listView.ItemClick += (object sender, ItemClickEventArgs e) =>
+            {
+                Note note = listView.GetItemAtPosition(e.Position).Cast<Note>();
+                EditNoteActivity.NoteToEdit = note;
+                Log.Info(GetType().Name, $"----- Note Header: {note.Headline}, Note Content: {note.Content}");
+                var intent = new Intent(this, typeof(EditNoteActivity));
+                //intent.PutExtra("NoteHeader", note.Headline);
+                //intent.PutExtra("NoteContent", note.Content);
+                StartActivity(intent);
+            };
 
             editNotesButton.Click += delegate
             {

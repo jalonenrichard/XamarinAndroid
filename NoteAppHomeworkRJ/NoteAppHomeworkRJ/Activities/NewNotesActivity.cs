@@ -38,7 +38,8 @@ namespace NoteAppHomeworkRJ
         private void AddNoteToDatabase()
         {
             var note = new Note {Headline = _header.Text, Content = _content.Text, CreatedDateTime = DateTime.Now};
-            _noteDao.SaveNoteToDatabase(note);
+            if (!NoteChecker.NoteIsEmpty(note))
+                _noteDao.SaveNoteToDatabase(note);
         }
 
         private void SwitchToMainActivity()

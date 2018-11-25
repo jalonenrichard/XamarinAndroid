@@ -57,10 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomAdapter.cs" />
-    <Compile Include="MainActivity.cs" />
-    <Compile Include="NewNotesActivity.cs" />
+    <Compile Include="Activities\EditNoteActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\NewNotesActivity.cs" />
     <Compile Include="Note.cs" />
+    <Compile Include="NoteChecker.cs" />
     <Compile Include="NoteDao.cs" />
+    <Compile Include="ObjectTypeHelper.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -96,6 +99,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>8.0.3</Version>
+    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
     </PackageReference>
@@ -108,6 +114,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\noteadd_layout.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\noteedit_layout.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
