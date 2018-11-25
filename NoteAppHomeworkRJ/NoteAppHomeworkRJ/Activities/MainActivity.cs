@@ -7,13 +7,11 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Util;
 using Android.Widget;
-using Newtonsoft.Json;
 using Environment = System.Environment;
-using static Android.Widget.AdapterView;
 
-namespace NoteAppHomeworkRJ
+namespace NoteAppHomeworkRJ.Activities
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : AppCompatActivity
     {
         private List<Note> _noteList;
@@ -43,7 +41,7 @@ namespace NoteAppHomeworkRJ
 
             listView.Adapter = new CustomAdapter(this, _noteList);
 
-            listView.ItemClick += (object sender, ItemClickEventArgs e) =>
+            listView.ItemClick += (sender, e) =>
             {
                 Note note = listView.GetItemAtPosition(e.Position).Cast<Note>();
                 EditNoteActivity.NoteToEdit = note;

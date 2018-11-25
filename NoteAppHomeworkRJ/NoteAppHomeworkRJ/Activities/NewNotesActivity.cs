@@ -6,7 +6,7 @@ using Android.OS;
 using Android.Widget;
 using Environment = System.Environment;
 
-namespace NoteAppHomeworkRJ
+namespace NoteAppHomeworkRJ.Activities
 {
     [Activity(Label = "@string/new_note", Theme = "@style/AppTheme")]
     internal class NewNotesActivity : Activity

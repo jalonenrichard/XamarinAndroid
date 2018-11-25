@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Util;
-using Android.Views;
 using Android.Widget;
-using Newtonsoft.Json;
 
-namespace NoteAppHomeworkRJ
+namespace NoteAppHomeworkRJ.Activities
 {
     [Activity(Label = "@string/edit_note", Theme = "@style/AppTheme")]
     class EditNoteActivity : Activity
@@ -43,7 +37,7 @@ namespace NoteAppHomeworkRJ
             _header.Text = NoteToEdit.Headline;
             _content.Text = NoteToEdit.Content;
             Log.Info(GetType().Name, $"----- Note header: {_header.Text}, Note Content: {_content.Text}");
-            
+
             _saveButton.Click += delegate
             {
                 if (NoteToEdit.Headline != _header.Text || NoteToEdit.Content != _content.Text)
