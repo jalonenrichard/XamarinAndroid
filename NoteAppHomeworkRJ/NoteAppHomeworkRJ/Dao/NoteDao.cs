@@ -1,8 +1,9 @@
 ﻿using System;
 using Android.Util;
+using NoteAppHomeworkRJ.Model;
 using SQLite;
 
-namespace NoteAppHomeworkRJ
+namespace NoteAppHomeworkRJ.Dao
 {
     internal class NoteDao
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using SQLite;
 
-namespace NoteAppHomeworkRJ
+namespace NoteAppHomeworkRJ.Model
 {
     public class Note
     {

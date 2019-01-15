@@ -1,21 +1,23 @@
 ﻿using System;
-using System.IO;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Util;
 using Android.Widget;
+using NoteAppHomeworkRJ.Helper;
+using NoteAppHomeworkRJ.Model;
+using NoteAppHomeworkRJ.Service;
 
 namespace NoteAppHomeworkRJ.Activities
 {
     [Activity(Label = "@string/edit_note", Theme = "@style/AppTheme")]
-    class EditNoteActivity : Activity
+    internal class EditNoteActivity : Activity
     {
         public static Note NoteToEdit { get; set; }
 
         private EditText _content;
         private EditText _header;
-        private NoteDao _noteDao;
+        private NoteService _noteService;
         private Button _saveButton;
         private Button _deleteButton;
 
@@ -28,11 +30,7 @@ namespace NoteAppHomeworkRJ.Activities
             _content = FindViewById<EditText>(Resource.Id.editTextNoteContentEdit);
             _saveButton = FindViewById<Button>(Resource.Id.buttonNoteSave);
             _deleteButton = FindViewById<Button>(Resource.Id.buttonNoteDelete);
-
-            _noteDao = new NoteDao(Path.Combine(
-                System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
-                "noteDatabase.db3"));
-            _noteDao.ConnectToDatabase();
+            _noteService = new NoteService();
 
             _header.Text = NoteToEdit.Headline;
             _content.Text = NoteToEdit.Content;
@@ -44,8 +42,8 @@ namespace NoteAppHomeworkRJ.Activities
                 {
                     NoteToEdit.Headline = _header.Text;
                     NoteToEdit.Content = _content.Text;
-                    UpdateNoteInDatabase();
-                    Log.Info(GetType().Name, $"----- Note edited in database.");
+                    UpdateNote();
+                    Log.Info(GetType().Name, "----- Note edited in database.");
                 }
                 else
                     SwitchToMainActivity();
@@ -53,15 +51,15 @@ namespace NoteAppHomeworkRJ.Activities
 
             _deleteButton.Click += delegate
             {
-                _noteDao.RemoveNoteFromDatabase(NoteToEdit);
+                _noteService.RemoveNote(NoteToEdit);
                 RunOnUiThread(() =>
                     Toast.MakeText(this, "Note removed from database", ToastLength.Short).Show());
-                Log.Info(GetType().Name, $"----- Note removed from database.");
+                Log.Info(GetType().Name, "----- Note removed from database.");
                 SwitchToMainActivity();
             };
         }
 
-        private void UpdateNoteInDatabase()
+        private void UpdateNote()
         {
             NoteToEdit.CreatedDateTime = DateTime.Now;
             if (NoteChecker.NoteIsEmpty(NoteToEdit))
@@ -69,7 +67,7 @@ namespace NoteAppHomeworkRJ.Activities
                     Toast.MakeText(this, "Header and Content are both empty", ToastLength.Short).Show());
             else
             {
-                _noteDao.UpdateNoteInDatabase(NoteToEdit);
+                _noteService.EditNote(NoteToEdit);
                 SwitchToMainActivity();
             }
         }

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 using Android.Util;
 using Android.Widget;
-using Environment = System.Environment;
+using NoteAppHomeworkRJ.Service;
+using NoteAppHomeworkRJ.Helper;
+using NoteAppHomeworkRJ.Model;
 
 namespace NoteAppHomeworkRJ.Activities
 {
@@ -15,6 +16,7 @@ namespace NoteAppHomeworkRJ.Activities
     public class MainActivity : AppCompatActivity
     {
         private List<Note> _noteList;
+        private NoteService _noteService;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,12 +26,9 @@ namespace NoteAppHomeworkRJ.Activities
             var listView = FindViewById<ListView>(Resource.Id.listView1);
             var newNoteButton = FindViewById<Button>(Resource.Id.buttonNewNote);
 
-            var noteDao = new NoteDao(Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.Personal),
-                "noteDatabase.db3"));
-            noteDao.CreateNewNoteTable();
-
-            var allNotes = noteDao.GetAllNotesFromDatabase();
+            _noteService = new NoteService();
+            _noteService.CreateNewNoteTable();
+            var allNotes = _noteService.GetAllNotes();
             try
             {
                 _noteList = allNotes.ToList();

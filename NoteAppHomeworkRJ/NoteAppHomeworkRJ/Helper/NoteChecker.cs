@@ -1,4 +1,6 @@
-﻿namespace NoteAppHomeworkRJ
+﻿using NoteAppHomeworkRJ.Model;
+
+namespace NoteAppHomeworkRJ.Helper
 {
     public static class NoteChecker
     {

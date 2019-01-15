@@ -1,4 +1,4 @@
-﻿namespace NoteAppHomeworkRJ
+﻿namespace NoteAppHomeworkRJ.Helper
 {
     public static class ObjectTypeHelper
     {
